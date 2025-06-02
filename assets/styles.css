@@ -1,0 +1,24 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.task-item {
+  margin-bottom: 10px;
+}
+
+.task-item button {
+  margin-left: 10px;
+}
+ #timelineTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  #timelineTable th, #timelineTable td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ccc;
+  }
+  #timelineTable th {
+    background-color: #f2f2f2;
+  }

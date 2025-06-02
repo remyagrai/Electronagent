@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdnjs.cloudflare.com">
+  <title>Electron Activity Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    #browserActivityLog, #tasksLog {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 150px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      margin-bottom: 20px;
+    }
+
+    #timelineCanvas {
+      border: 1px solid #444;
+      width: 800px;
+      height: 150px;
+    }
+
+    .task-radio {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Task Manager</h2>
+
+  <!-- Task Selection Area -->
+  <div>
+    <h3>Select Task</h3>
+    <ul id="taskRadioList"></ul>
+    <input type="text" id="selectedTaskName" placeholder="Selected Task" readonly />
+    <br><br>
+    <button id="startBtn">Start</button>
+    <button id="stopBtn" disabled>Stop</button>
+    <div id="currentTaskStatus">No active task</div>
+  </div>
+
+  <h2>Laptop Activity Status</h2>
+  <div id="activityState">Status: Unknown</div>
+
+  <h2>Browser Activity (Real-time)</h2>
+  <div id="browserActivityLog">Waiting for activity...</div>
+<h2>Timeline Details Table</h2>
+<!--<canvas id="timelineCanvas" width="800" height="150" style="border:1px solid #ccc;">
+</canvas>-->
+<h2>Laptop Active Periods</h2>
+<table id="activePeriodsTable" border="1" cellpadding="5" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Duration (seconds)</th>
+    </tr>
+  </thead>
+  <tbody id="activePeriodsTableBody">
+    <!-- Active periods rows here -->
+  </tbody>
+</table>
+
+<h2>Laptop Inactive Periods</h2>
+<table id="inactivePeriodsTable" border="1" cellpadding="5" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Duration (seconds)</th>
+    </tr>
+  </thead>
+  <tbody id="inactivePeriodsTableBody">
+    <!-- Inactive periods rows here -->
+  </tbody>
+</table>
+
+<table id="timelineTable" border="1" cellpadding="5" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Duration (s)</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+  
+<button id="exportFullPageImageBtn">Export as Image</button>
+<button id="exportFullPagePdfBtn">Export as PDF</button>
+  <script src="./renderer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>
