@@ -10,15 +10,87 @@ body {
 .task-item button {
   margin-left: 10px;
 }
- #timelineTable {
+ #timelineTable, #tasksTable, #browserActivityTable {
     width: 100%;
     border-collapse: collapse;
   }
-  #timelineTable th, #timelineTable td {
+  #timelineTable th,#tasksTable th, #timelineTable td, #tasksTable td, #browserActivityTable th, #browserActivityTable td {
     padding: 8px;
     text-align: left;
     border: 1px solid #ccc;
   }
-  #timelineTable th {
+  #timelineTable th, #tasksTable td, #browserActivityTable td{
     background-color: #f2f2f2;
   }
+
+  /* Basic reset for tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+/* Table headers */
+thead tr {
+  background-color: #007BFF; /* Bootstrap blue */
+  color: white;
+  text-align: left;
+}
+
+th, td {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+}
+
+/* Zebra striping for rows */
+tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+table{
+  margin-top: 2em;
+}
+/* Hover effect on rows */
+tbody tr:hover {
+  background-color: #e6f2ff;
+}
+
+/* Caption styling (optional) */
+table caption {
+  caption-side: top;
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive scroll for small screens */
+@media (max-width: 600px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  
+  thead tr {
+    display: none;
+  }
+  
+  tbody tr {
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+  }
+  
+  tbody td {
+    border: none;
+    padding-left: 50%;
+    position: relative;
+    text-align: left;
+  }
+  
+  tbody td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 1rem;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+}

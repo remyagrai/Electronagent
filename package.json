@@ -1,14 +1,19 @@
 {
-  "name": "activity-tracker-agent",
+  "name": "electron-agent",
   "version": "1.0.0",
-  "description": "Electron app to track daily tasks and timeline with MongoDB",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
   "dependencies": {
-    "electron": "^25.0.0",
-    "mongoose": "^7.0.4"
+    "electron": "^36.3.2",
+    "html2canvas": "^1.4.1",
+    "iohook": "^0.9.3",
+    "jspdf": "^3.0.1",
+    "node-fetch": "^2.6.7",
+    "ws": "^8.18.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "electron-rebuild": "^3.2.9"
+  }
 }
