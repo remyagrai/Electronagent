@@ -220,8 +220,10 @@ let laptopStatus = 'Active';
 let activityStartTime = Date.now();
 let inactivityTimeout = null;
 const activePeriods = [];
+const activelogs=[];
+const groupedBrowser=[];
 const inactivePeriods = [];
-const inactivityThreshold = 120000; // 2 minutes
+const inactivityThreshold = 5000; // 2 minutes
 function updateStatus(newStatus) {
   const now = Date.now();
   const duration = now - activityStartTime;
@@ -620,7 +622,7 @@ setInterval(() => {
       start: entry.start,
       stop: entry.end
     });
-  })},120000);
+  })},10000);
   
 document.getElementById('generateUserTimelinePDF').onclick = () => {
   generateUserTimelinePDF ();
@@ -738,6 +740,18 @@ function renderActiveInactiveTables() {
 }
 
 
+const activeAppsTable = document.querySelector("#activeAppsTable tbody");
+
+// Listen for active app updates from main process
+ipcRenderer.on('active-app', (event, data) => {
+  const row = document.createElement('tr');
+  row.innerHTML = `
+    <td>${data.appName}</td>
+    <td>${data.title}</td>
+    <td>${new Date(data.timestamp).toLocaleTimeString()}</td>
+  `;
+  activeAppsTable.appendChild(row);
+});
 
 
 

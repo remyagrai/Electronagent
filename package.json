@@ -6,6 +6,7 @@
     "start": "electron ."
   },
   "dependencies": {
+    "active-win": "^8.0.1",
     "electron": "^36.3.2",
     "html2canvas": "^1.4.1",
     "iohook": "^0.9.3",

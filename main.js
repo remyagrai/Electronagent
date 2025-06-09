@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
+const activeWin = require('active-win');
 
 app.commandLine.appendSwitch('disable-features', 'AutofillServerCommunication');
 
@@ -21,9 +22,34 @@ mainWindow = new BrowserWindow({
 
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 }
+ipcMain.handle('get-active-app', async () => {
+  const info = await activeWin();
+  return info;
+});
 
 app.whenReady().then(() => {
   createWindow();
+
+  let lastApp = null;
+  setInterval(async () => {
+    const info = await activeWin();
+    if (!info) return;
+
+    if (
+      lastApp?.appName !== info.owner.name ||
+      lastApp?.title !== info.title
+    ) {
+      lastApp = {
+        appName: info.owner.name,
+        title: info.title,
+      };
+      mainWindow.webContents.send('active-app', {
+        appName: info.owner.name,
+        title: info.title,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }, 3000);
 
   wss = new WebSocket.Server({ port: 8765 });
   console.log('WebSocket server listening on ws://localhost:8765');
@@ -32,7 +58,6 @@ app.whenReady().then(() => {
     console.log('Browser extension connected');
 
     ws.on('message', (message) => {
-      // Forward browser activity message to renderer process
       if (mainWindow && mainWindow.webContents) {
         mainWindow.webContents.send('browser-activity', message.toString());
       }
